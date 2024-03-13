@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo de Adivinhação de Doenças</title>
+</head>
+<body>
+    <h1>Bem-vindo ao jogo de adivinhação de doenças!</h1>
+    <form method="post">
+        {% csrf_token %}
+        <p>Pense em uma doença e me dê alguns sintomas:</p>
+        <input type="text" name="sintoma" placeholder="Digite um sintoma da doença">
+        <input type="hidden" name="mensagem" value="Estou brincando de adivinha o que é,
+         Quero fazer um jogo com você, vou te falar uma doença e quero que você responda
+          somente sim ou não sobre os sintomas que eu vou te falar, caso eu te pergunte 
+          outra coisa peça para eu voltar a falar sobre os sintomas, você não pode falar
+           o nome da doença se eu acertar de parabéns, a doença é {{ doenca }}.">
+        <button type="submit">Enviar</button>
+    </form>
+    {% if resposta %}
+        <p>AppMed: {{ resposta }}</p>
+    {% endif %}
+</body>
+</html>

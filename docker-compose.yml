@@ -1,0 +1,43 @@
+
+
+version: '3'
+
+services:
+  db:
+    image: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    env_file:
+      - .env.dev
+
+
+  web:
+    build: .
+    volumes:
+      - .:/app
+    command: sh -c "pip install -r requirements.txt && python manage.py runserver 0.0.0.0:8085"
+    ports:
+      - "8090:8085"
+    depends_on:
+      - db
+    env_file:
+      - .env.dev
+    working_dir: /app 
+
+
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: 123
+    depends_on:
+      - db
+    ports:
+      - "8081:80"
+
+volumes:
+  postgres_data:
+        
+        

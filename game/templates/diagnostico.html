@@ -1,0 +1,121 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Iniciar Diagnóstico</title>
+    <!-- Adicionar Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <!-- Estilo personalizado -->
+    <style>
+      body {
+        background-color: #f8f9fa;
+      }
+      .container {
+        margin-top: 50px;
+      }
+      .card {
+        border: 1px solid #dee2e6;
+        border-radius: 10px;
+      }
+      .card-header {
+        background-color: #20c997;
+        color: white;
+      }
+      .avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        margin-left: auto;
+    }
+      .btn-teal {
+        background-color: #20c997;
+        border-color: #20c997;
+      }
+      .btn-teal:hover {
+        background-color: #17a2b8;
+        border-color: #17a2b8;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+        <div class="card mb-4">
+          <div class="card-header">
+            <h1 class="text-center">Iniciar Diagnóstico</h1>
+          </div>
+          <!-- Informações do Paciente -->
+          <div class="card-body">
+              <div class=" mb-3">
+                  <div class="ml-3">
+                      <strong>Nome:</strong> {{paciente.nome}}<br>
+                      <strong>Sexo:</strong> {{paciente.sexo}}<br>
+                      <strong>Idade:</strong> {{paciente.idade}}<br>
+                      <strong>Naturalidade:</strong> {{paciente.naturalidade}}<br>
+                      <strong>Procedência:</strong> {{paciente.onde_mora}}<br>
+                      <strong>Profissão:</strong> {{paciente.profissao}}<br>
+                  </div>
+              </div>
+              <label for="pergunta">Olá, meu nome é {{nome_medico}},  e eu serei o médico responsável pelo seu atendimento</label>
+            <form action="" method="post">
+              {% csrf_token %}
+              <input type="hidden" name="nome_medico" value="{{ nome_medico }}">
+              <div class="form-group">
+                <label for="pergunta">Selecione uma pergunta:</label>
+                <select class="form-control" id="pergunta" name="pergunta">
+                  <option value="pergunta_1">
+                    Qual é o principal sintoma apresentado pelo paciente?
+                  </option>
+                  <option value="pergunta_2">
+                    O paciente possui algum histórico médico relevante? (ex:
+                    doenças crônicas, alergias)
+                  </option>
+                  <option value="pergunta_3">
+                    Existe algum fator desencadeante conhecido para os sintomas
+                    apresentados?
+                  </option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="resposta">Respostas:</label>
+                <textarea class="form-control" id="resposta" name="resposta" rows="8"
+                
+                 >
+                 {{conversa}}
+
+                </textarea>
+            </div>
+              <button type="submit" class="btn btn-teal btn-block">
+                Obter Resposta
+              </button>
+            </form>
+          </div>
+          <div class="card-footer">
+            <button type="button" class="btn btn-primary btn-block mb-2"  onclick="pedirExames()">Pedir Exames(ajuda)</button>
+            <div id="informacoes-paciente" style="display: none;">
+              <strong>Nome:</strong> {{paciente.nome}}<br>
+            </div>
+            <div class="form-group">
+              <label for="advinhar_doenca">Diagnosticar:</label>
+              <input type="text" class="form-control" id="advinhar_doenca" name="advinhar_doenca">
+            </div>
+            <button type="button" class="btn btn-success btn-block">Verificar</button>
+          </div>
+        </div>
+      </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      function pedirExames() {
+          var informacoesPaciente = document.getElementById("informacoes-paciente");
+          informacoesPaciente.style.display = informacoesPaciente.style.display === "block" ? "none" : "block";
+      }
+  </script>
+  </body>
+</html>

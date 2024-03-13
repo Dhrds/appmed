@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz sobre o Sistema Respiratório</title>
+    <!-- Adicionar Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Estilo personalizado -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        .card {
+            border: 1px solid #dee2e6;
+            border-radius: 10px;
+        }
+        .card-header {
+            background-color: #20c997;
+            color: white;
+        }
+        .avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-left: auto;
+        }
+        .btn-teal {
+            background-color: #20c997;
+            border-color: #20c997;
+        }
+        .btn-teal:hover {
+            background-color: #17a2b8;
+            border-color: #17a2b8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h1 class="text-center">Quiz sobre o Sistema Respiratório</h1>
+            </div>
+            <div class="card-body">
+
+
+                <h2>Identificação do Médico</h2>
+                <div class="form-group">
+                    <form action="{% url 'iniciar_diagnostico' %}" method="post" class="mt-5">
+                        {% csrf_token %}
+                    <label for="nome_medico">Nome do Médico:</label>
+                    <input type="text" class="form-control" id="nome_medico" name="nome_medico" required>
+                    
+                    <label for="crm_medico">CRM do Médico:</label>
+                    <input type="text" class="form-control" id="crm_medico" name="crm_medico">
+                    <label for="especialidade">Especialidade:</label>    
+                    <select class="form-control" id="especialidade" name="especialidade">
+                        <option value="Cardiologista">Cardiologista</option>
+                        <option value="Dermatologista">Dermatologista</option>
+                        <option value="Ginecologista">Ginecologista</option>
+                        <option value="Oftalmologista">Oftalmologista</option>
+                        <option value="Pediatra">Pediatra</option>
+                        <option value="Psiquiatra">Psiquiatra</option>
+                        <option value="Urologista">Urologista</option>
+                        <option value="Outra">Outra</option>
+                        </select>
+
+                </div>
+                <!-- Botão para iniciar o diagnóstico -->
+                    <button type="submit" class="btn btn-teal btn-block">Iniciar Diagnóstico</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Adicionar Bootstrap JS (opcional, para funcionalidades do Bootstrap) -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
