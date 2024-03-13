@@ -2,8 +2,9 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render
 from .models import Paciente, Doenca
 import openai
+import os
 
-openai.api_key = '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'
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
 def enviar(mensagem, lista_mensagens=[]):
