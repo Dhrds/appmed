@@ -3,13 +3,13 @@
 {% block title %} chat {% endblock title %}
 {% block conteudo %}
 <div class="chat-container">
-    <div class="sidebar">
+    {% comment %} <div class="sidebar">
         <h2>AppMed</h2>
         <ul>
             <li>Atendimento</li>
             <li>Suporte Técnico</li>
         </ul>
-    </div>
+    </div> {% endcomment %}
     <div class="chat">
         <div class="chat-header">
             <h1>
@@ -34,9 +34,9 @@
         <div class="chat-input">
             <form  method="post" class="chat-input">
                 {% csrf_token %}
-                <input type="text" name="mensagem" placeholder="Digite sua mensagem..." >
-                <input type="hidden" name="mensagens_anteriores" value="{{resposta.0.message}}">
+                <input type="text" name="mensagem" placeholder="Digite sua mensagem..." required >
                 <button type='submit'>Enviar</button>
+                <button type="submit" name="reiniciar" value="true">Reiniciar</button>
             </form>
         </div>
         <button id="show-instructions">Mostrar Instruções</button>

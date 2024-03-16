@@ -5,7 +5,9 @@ import os
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
-def enviar(mensagem, lista_mensagens=[],):
+def enviar(mensagem, lista_mensagens=[], reiniciar=False):
+    if reiniciar:
+        lista_mensagens = []
     if not lista_mensagens:
         lista_mensagens.append(
             {
@@ -32,8 +34,9 @@ em um platô, nega febre, alterações no apetite, sono, fraqueza e peso,
 nega dispneia, dor torácica ,
 cianose e chieira
 
-sua primeira interação sera se apresentar e aguardar as perguntas dos sintomas
-                """
+sua primeira e somente a primeira interação sera
+'Olá, meu nome é José e tenho 50 anos. Aguardarei suas perguntas sobre os sintomas.'
+                """ # noqa E501
             }
         )
     lista_mensagens.append(
@@ -54,12 +57,15 @@ sua primeira interação sera se apresentar e aguardar as perguntas dos sintomas
 def jogo_adivinhacao(request):
 
     if request.method == 'GET':
-        response = enviar('', [])
+        response = ''
+        response = enviar('', reiniciar=True)
+        print(response)
     if request.method == 'POST':
         mensagem_atual = request.POST.get('mensagem', '')
-        # mensagens_anteriores = json.loads(
-        #     request.POST.get('mensagens_anteriores', ''))
-        response = enviar(mensagem_atual)
+        reiniciar = bool(request.POST.get('reiniciar', False))
+        if reiniciar:
+            response = ''
+        response = enviar(mensagem_atual, reiniciar=reiniciar)
         return render(request, 'chat.html', {
             'resposta': response})
     return render(request, 'chat.html', {'resposta': response})
