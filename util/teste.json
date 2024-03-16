@@ -1,0 +1,31 @@
+[
+ {"role": "user", "content": ""}, <OpenAIObject at 0x22d8f501f90> JSON: {"role": "assistant", "content": "Hello! How can I assist you today?"},
+ {"role": "user", "content": "ola tudo bem"}, <OpenAIObject at 0x22d8f414720> JSON:
+ {"role": "assistant","content": "Ol\u00e1! Estou bem, obrigado. Como posso ajudar voc\u00ea hoje?"},
+ {"role": "user", "content": "voce conhece o java"}, <OpenAIObject at 0x22d8f7f74f0> JSON: 
+ {"role": "assistant","content": "Sim, eu conhe\u00e7o o Java. Java \u00e9 uma linguagem de programa\u00e7\u00e3o muito popular que \u00e9 usada para desenvolver uma variedade de aplicativos, desde aplicativos para web at\u00e9 aplicativos m\u00f3veis. Voc\u00ea tem alguma pergunta espec\u00edfica sobre Java? Posso tentar te ajudar."},
+ {"role": "user", "content": "como faço o input dele"}
+]
+{
+  "id": "chatcmpl-93Ujvo4YCqIIxqlvPqlkLrlhRf5iT",
+  "object": "chat.completion",
+  "created": 1710620175,
+  "model": "gpt-3.5-turbo-0125",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "Para realizar a entrada de dados (input) em Java, voc\u00ea pode usar a classe Scanner, que est\u00e1 dispon\u00edvel no pacote java.util. Aqui est\u00e1 um exemplo simples de como fazer a entrada de um n\u00famero inteiro:\n\n```java\nimport java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner scanner = new Scanner(System.in);\n        \n        System.out.println(\"Digite um n\u00famero inteiro:\");\n        int num = scanner.nextInt();\n        \n        System.out.println(\"Voc\u00ea digitou: \" + num);\n        \n        scanner.close();\n    }\n}\n```\n\nNeste exemplo, o programa solicita ao usu\u00e1rio que digite um n\u00famero inteiro, l\u00ea o valor digitado pelo usu\u00e1rio e o imprime na tela. Lembre-se de importar a classe Scanner no in\u00edcio do seu arquivo Java. Espero que isso ajude! Se precisar de mais alguma informa\u00e7\u00e3o, estou \u00e0 disposi\u00e7\u00e3o."
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 135,
+    "completion_tokens": 193,
+    "total_tokens": 328
+  },
+  "system_fingerprint": "fp_4f2ebda25a"
+}

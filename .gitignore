@@ -3,6 +3,7 @@
 .env.dev
 .env.test
 .env.prod
+.env
 /venv
 # Arquivos de log
 *.log

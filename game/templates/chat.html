@@ -4,7 +4,7 @@
 {% block conteudo %}
 <div class="chat-container">
     <div class="sidebar">
-        <h2>Contatos</h2>
+        <h2>AppMed</h2>
         <ul>
             <li>Atendimento</li>
             <li>Suporte Técnico</li>
@@ -12,17 +12,60 @@
     </div>
     <div class="chat">
         <div class="chat-header">
-            <h2>Atendimento</h2>
-        </div>
+            <h1>
+                Simulação Médica
+            </h1>
+    </div>
         <div class="chat-messages">
-            <div class="message received">
-                <p>Olá! Como posso ajudar você hoje?</p>
-            </div>
+            {% for i in resposta %}
+                {% if i.role == "user"  %}
+                    <div class="message enviada">
+                        <p>{{ i.content }}</p>
+                    </div>
+                {% endif %}
+                {% if i.role == "assistant"  %}
+                    <div class="message received">
+                        <p>{{i.content}}</p>
+                    </div>
+                {% endif %}
+            {% endfor %}
+
         </div>
         <div class="chat-input">
-            <input type="text" placeholder="Digite sua mensagem...">
-            <button>Enviar</button>
+            <form  method="post" class="chat-input">
+                {% csrf_token %}
+                <input type="text" name="mensagem" placeholder="Digite sua mensagem..." >
+                <input type="hidden" name="mensagens_anteriores" value="{{resposta.0.message}}">
+                <button type='submit'>Enviar</button>
+            </form>
         </div>
+        <button id="show-instructions">Mostrar Instruções</button>
+    <footer class="game-instructions" style="display: none;"> 
+        <h2>Instruções do Jogo de Simulação Médica</h2>
+        <h3>Objetivo:</h3>            
+        <p>O objetivo deste jogo de simulação médica é adivinhar a doença do paciente
+             através de perguntas sobre seus sintomas e histórico médico. O jogador que
+             interpreta o médico precisa usar suas habilidades de 
+             diagnóstico para identificar a doença corretamente.</p>
+
+        <p>O jogador que interpreta o médico pode fazer perguntas sobre os sintomas,
+                 histórico médico e estilo de vida do paciente.</p>
+        <h3>Dicas para Novos Jogadores:</h3>
+        <p>Preste atenção aos detalhes dos sintomas do paciente.</p>
+        <p>Faça perguntas específicas para descartar possíveis doenças.</p>
+        <p>Use o histórico médico do paciente para ajudar no diagnóstico.</p>
+        <p>Se você estiver preso, peça dicas ao jogador que interpreta o paciente.</p>
+
+    </footer>
+
     </div>
+    
+    <script>
+      // Add click event listener to show/hide instructions
+      document.getElementById('show-instructions').addEventListener('click', function() {
+        var instructions = document.querySelector('.game-instructions');
+        instructions.style.display = instructions.style.display === 'none' ? 'block' : 'none';
+      });
+    </script>
 {% endblock conteudo %}
 

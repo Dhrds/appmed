@@ -1,70 +1,65 @@
-from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, render
-from .models import Paciente, Doenca
+from django.shortcuts import render
 import openai
 import os
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 
-def enviar(mensagem, lista_mensagens=[]):
+def enviar(mensagem, lista_mensagens=[],):
+    if not lista_mensagens:
+        lista_mensagens.append(
+            {
+                "role": "system", "content":
+                """
+Estou brincando de adivinhar o que é,
+Quero fazer um jogo com vc,
+vou te falar uma doença e quero que você simule que tenha essa doença,
+você será o paciente respondendo sim ou não sobre os sintomas
+que eu vou te falar,
+quando eu te pedir os exames quero que você simule um exame que
+indique positivo para a doença escolhida,
+caso eu te peço outra coisa peça para eu voltar a falar sobre a doença,
+você não pode falar o nome da doença, se eu conseguir de parabéns,
+
+a doença é  IVAS (Resfriado comum)
+
+você se chama José é uma Paciente de 50 anos de idade
+apresentou quadro de cefaleia,
+dor de garganta e  espirros há 5 dias, com aparecimento de tosse purulenta ,
+obstrução nasal, rinorreia anterior e  mal-estar  há 2 dias.
+Relata que intensidade dos sintomas aumentaram até o terceiro dia e agora está
+em um platô, nega febre, alterações no apetite, sono, fraqueza e peso,
+nega dispneia, dor torácica ,
+cianose e chieira
+
+sua primeira interação sera se apresentar e aguardar as perguntas
+                """
+            }
+        )
     lista_mensagens.append(
         {"role": "user", "content": mensagem}
     )
+    print(lista_mensagens)
 
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=lista_mensagens,
     )
+    print(response)
     lista_mensagens.append(response["choices"][0]["message"])
 
-    return response["choices"][0]["message"]
-
-
-def index(request):
-    return render(request, 'index.html')
-
-
-def diagnostico(request):
-    paciente = get_object_or_404(Paciente, id=2)
-    doenca = get_object_or_404(Doenca, id=2)
-    context = {'paciente': paciente,
-               'conversa': ''}
-    if request.method == 'POST':
-        nome_medico = request.POST.get('nome_medico')
-        crm_medico = request.POST.get('crm_medico')
-        especialidade = request.POST.get('especialidade')
-        pergunta_selecionada = request.POST.get('pergunta')
-        respostas = request.POST.get('resposta')
-
-        if pergunta_selecionada == 'pergunta_1':
-            context['conversa'] += (respostas)
-            context['conversa'] += ('P: Qual é o principal sintoma apresentado pelo paciente?') # noqa
-            context['conversa'] += (f'\n R: {doenca.sintomas}')
-        elif pergunta_selecionada == 'pergunta_2':
-            context['conversa'] += (respostas)
-            context['conversa'] += ('P: O paciente possui algum histórico médico relevante? (ex: doenças crônicas, alergias)') # noqa
-            context['conversa'] += (f'\n R: {doenca.descricao}')
-        elif pergunta_selecionada == 'pergunta_3':
-            context['conversa'] += (respostas)
-            context['conversa'] += ('P: Existe algum fator desencadeante conhecido para os sintomas apresentados?') # noqa
-            context['conversa'] += (f'\n R: {doenca.descricao}')
-        context['nome_medico'] = nome_medico
-        context['crm_medico'] = crm_medico
-        context['especialidade'] = especialidade
-        print(context['conversa'])
-    return render(request, 'diagnostico.html', context)
-
-
-def processar_resposta(request):
-    return HttpResponse("Método HTTP não suportado")
+    return lista_mensagens
 
 
 def jogo_adivinhacao(request):
+
+    if request.method == 'GET':
+        response = enviar('', [])
     if request.method == 'POST':
-        sintoma = request.POST.get('sintoma', '')
-        mensagem = request.POST.get('mensagem', '')
-        response = enviar(sintoma, [{'role': 'system', 'content': mensagem}])
+        mensagem_atual = request.POST.get('mensagem', '')
+        # mensagens_anteriores = json.loads(
+        #     request.POST.get('mensagens_anteriores', ''))
+        response = enviar(mensagem_atual)
         return render(request, 'chat.html', {
-            'resposta': response["content"]})
-    return render(request, 'chat.html', {'resposta': None})
+            'resposta': response})
+    return render(request, 'chat.html', {'resposta': response})
