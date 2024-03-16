@@ -32,7 +32,7 @@ em um platô, nega febre, alterações no apetite, sono, fraqueza e peso,
 nega dispneia, dor torácica ,
 cianose e chieira
 
-sua primeira interação sera se apresentar e aguardar as perguntas
+sua primeira interação sera se apresentar e aguardar as perguntas dos sintomas
                 """
             }
         )
