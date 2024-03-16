@@ -7,7 +7,7 @@ WORKDIR /app
 COPY requirements.txt ./
 
 # Instala as dependências
-RUN pip install --no-cache-dir -r requirements.txt
+RUN sh -c "pip install -r requirements.txt && python manage.py runserver 0.0.0.0:8085"
 
 # Copia o restante dos arquivos para o contêiner
 COPY . .

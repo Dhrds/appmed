@@ -6,4 +6,4 @@
 /venv
 # Arquivos de log
 *.log
-        
+__pycache__/**
