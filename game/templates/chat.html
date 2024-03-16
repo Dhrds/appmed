@@ -1,23 +1,23 @@
 {% extends "base.html" %}
+
+{% block title %} chat {% endblock title %}
 {% block conteudo %}
 <div class="chat-container">
     <div class="sidebar">
         <h2>Contatos</h2>
         <ul>
-            <li>Atendimento ao Cliente</li>
+            <li>Atendimento</li>
             <li>Suporte Técnico</li>
-            <li>Vendas</li>
         </ul>
     </div>
     <div class="chat">
         <div class="chat-header">
-            <h2>Atendimento ao Cliente</h2>
+            <h2>Atendimento</h2>
         </div>
         <div class="chat-messages">
             <div class="message received">
                 <p>Olá! Como posso ajudar você hoje?</p>
             </div>
-            <!-- Aqui serão exibidas as mensagens do chat -->
         </div>
         <div class="chat-input">
             <input type="text" placeholder="Digite sua mensagem...">

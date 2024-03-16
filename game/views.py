@@ -65,6 +65,6 @@ def jogo_adivinhacao(request):
         sintoma = request.POST.get('sintoma', '')
         mensagem = request.POST.get('mensagem', '')
         response = enviar(sintoma, [{'role': 'system', 'content': mensagem}])
-        return render(request, 'jogo_adivinhacao.html', {
+        return render(request, 'chat.html', {
             'resposta': response["content"]})
-    return render(request, 'jogo_adivinhacao.html', {'resposta': None})
+    return render(request, 'chat.html', {'resposta': None})

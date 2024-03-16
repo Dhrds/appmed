@@ -1,0 +1,94 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.chat-container {
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    width: 250px;
+    background-color: #f0f0f0;
+    padding: 20px;
+}
+
+.sidebar h2 {
+    margin-top: 0;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    cursor: pointer;
+    padding: 10px 0;
+}
+
+.chat {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-header {
+    background-color: #075e54;
+    color: #fff;
+    padding: 20px;
+}
+
+.chat-header h2 {
+    margin: 0;
+}
+
+.chat-messages {
+    flex: 1;
+    overflow-y: scroll;
+    padding: 20px;
+}
+
+.message {
+    margin-bottom: 20px;
+}
+
+.message p {
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.message.received p {
+    background-color: #d3d3d3;
+    color: #000;
+}
+
+.chat-input {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    margin-right: 10px;
+}
+
+.chat-input button {
+    background-color: #075e54;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.chat-input button:hover {
+    background-color: #0d823f;
+}
