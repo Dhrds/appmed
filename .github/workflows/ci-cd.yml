@@ -21,7 +21,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          sudo nano teste.txt
+          sudo mkdir teste1
 
       - name: Run tests
         run: |
