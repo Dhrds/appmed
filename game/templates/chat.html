@@ -36,9 +36,12 @@
                 {% csrf_token %}
                 <input type="text" name="mensagem" placeholder="Digite sua mensagem..." required >
                 <button type='submit'>Enviar</button>
-                <button type="submit" name="reiniciar" value="true">Reiniciar</button>
             </form>
-        </div>
+            <form  method="post">
+                {% csrf_token %}
+                <button type="submit" name="reiniciar" value="true">Reiniciar</button>
+            </div>
+        </form>
         <button id="show-instructions">Mostrar Instruções</button>
     <footer class="game-instructions" style="display: none;"> 
         <h2>Instruções do Jogo de Simulação Médica</h2>
@@ -61,11 +64,24 @@
     </div>
     
     <script>
-      // Add click event listener to show/hide instructions
       document.getElementById('show-instructions').addEventListener('click', function() {
         var instructions = document.querySelector('.game-instructions');
         instructions.style.display = instructions.style.display === 'none' ? 'block' : 'none';
       });
+      const chatMessages = document.querySelector('.chat-messages');
+
+    // Função para rolar para a última mensagem
+    function scrollToBottom() {
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // Adicionar evento de "carregar" à página
+    window.addEventListener('load', scrollToBottom);
+
+    // Adicionar evento de "submit" ao formulário de envio de mensagem
+    const chatInputForm = document.querySelector('.chat-input form');
+    chatInputForm.addEventListener('submit', scrollToBottom);
+
     </script>
 {% endblock conteudo %}
 
