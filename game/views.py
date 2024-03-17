@@ -7,7 +7,7 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 def enviar(mensagem, lista_mensagens=[], reiniciar=False):
     if reiniciar:
-        lista_mensagens = []
+        lista_mensagens.clear()
     if not lista_mensagens:
         lista_mensagens.append(
             {
