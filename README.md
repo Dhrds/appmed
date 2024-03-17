@@ -12,23 +12,16 @@ Para executar este projeto localmente, siga as instruções abaixo:
 1. Clone o repositório:
 
    ```bash
-   git clone https://github.com/dhrds/my-django-app.git
+   git clone https://github.com/Dhrds/appmed.git
    ```
 
 2. Navegue até o diretório do projeto:
 
    ```bash
-   cd my-django-app
+   cd appmed
    ```
 
-3. Execute o script de inicialização para instalar as dependências
-e aplicar as migrações do banco de dados:
-
-   ```bash
-   sh scripts/setup.sh
-   ```
-
-4. Inicie o ambiente Docker Compose:
+3. Inicie o ambiente Docker Compose:
 
    ```bash
    docker-compose up
@@ -52,33 +45,4 @@ Para executar os testes, utilize o seguinte comando:
 pytest
 ```
 
-## Contribuição
-
-Se você gostaria de contribuir para este projeto,
-por favor siga as etapas abaixo:
-
-1. Fork este repositório.
-2. Crie uma nova branch para suas alterações:
-
-   ```bash
-   git checkout -b minha-nova-feature
-   ```
-
-3. Faça suas alterações e commit:
-
-   ```bash
-   git commit -am 'Adiciona nova feature'
-   ```
-
-4. Push para a branch:
-
-   ```bash
-   git push origin minha-nova-feature
-   ```
-
-5. Crie um novo pull request.
-
-## Licença
-
-Este projeto está licenciado sob a [MIT License](LICENSE).
         
