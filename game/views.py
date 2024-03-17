@@ -48,7 +48,7 @@ sua primeira e somente a primeira interação sera
         model="gpt-3.5-turbo",
         messages=lista_mensagens,
     )
-    print(response)
+    # print(response)
     lista_mensagens.append(response["choices"][0]["message"])
 
     return lista_mensagens
@@ -57,14 +57,10 @@ sua primeira e somente a primeira interação sera
 def jogo_adivinhacao(request):
 
     if request.method == 'GET':
-        response = ''
         response = enviar('', reiniciar=True)
-        print(response)
-    if request.method == 'POST':
+    elif request.method == 'POST':
         mensagem_atual = request.POST.get('mensagem', '')
         reiniciar = bool(request.POST.get('reiniciar', False))
-        if reiniciar:
-            response = ''
         response = enviar(mensagem_atual, reiniciar=reiniciar)
         return render(request, 'chat.html', {
             'resposta': response})
