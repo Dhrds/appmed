@@ -47,7 +47,7 @@ Este projeto utiliza pytest para testes automatizados.
 Para executar os testes, utilize o seguinte comando:
 
 ```bash
-pytest
+python manage.py test
 ```
 
         
