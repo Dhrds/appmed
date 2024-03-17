@@ -20,14 +20,19 @@ Para executar este projeto localmente, siga as instruções abaixo:
    ```bash
    cd appmed
    ```
+3. crie o .env.dev
+   '''bash
+   sudo nano .env
+   '''
+   exemplo na pasta 'exemplos'
 
-3. Inicie o ambiente Docker Compose:
+5. Intale e inicie o ambiente Docker Compose:
 
    ```bash
    docker-compose up
    ```
 
-5. Acesse a aplicação em seu navegador em
+6. Acesse a aplicação em seu navegador em
 [http://localhost:8000](http://localhost:8000).
 
 ## Instruções de Uso
