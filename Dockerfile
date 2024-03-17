@@ -7,7 +7,7 @@ WORKDIR /app
 COPY requirements.txt ./
 
 # Instala as dependências
-RUN sh -c "pip install -r requirements.txt && python manage.py runserver 0.0.0.0:8085"
+RUN sh -c "pip install --upgrade pip && pip install -r requirements.txt "
 
 # Copia o restante dos arquivos para o contêiner
 COPY . .
